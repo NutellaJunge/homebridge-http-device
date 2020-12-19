@@ -12,8 +12,7 @@ const url = require('url');
 function mySwitch(log, config) {
   this.log = log;
   this.name = config['name'];
-  this.getUrl = url.parse(config['getUrl']);
-  this.postUrl = url.parse(config['postUrl']);
+  this.url = url.parse(config['url']);
 }
 
 mySwitch.prototype.getServices = function () {
@@ -36,11 +35,7 @@ mySwitch.prototype.getServices = function () {
 
 mySwitch.prototype.getSwitchOnCharacteristic = function (next) {
   const me = this;
-  request({
-    url: me.getUrl,
-    method: 'GET',
-  },
-  function (error, response, body) {
+  request(me.url, function (error, response, body) {
     if (error) {
       me.log('STATUS: ' + response.statusCode);
       me.log(error.message);
@@ -52,20 +47,20 @@ mySwitch.prototype.getSwitchOnCharacteristic = function (next) {
 
 mySwitch.prototype.setSwitchOnCharacteristic = function (on, next) {
   const me = this;
-  request({
-    url: me.postUrl,
-    body: {'targetState': on},
-    method: 'POST',
-    headers: {'Content-type': 'application/json'}
-  },
-  function (error, response) {
-    if (error) {
-      if (response !== undefined) {
-        me.log('STATUS: ' + response.statusCode);
+  request.post(
+    {
+      url: me.url,
+      form: {targetState: on}
+    },
+    function (error, response, body) {
+      if (error) {
+        if (response !== undefined) {
+          me.log('STATUS: ' + response.statusCode);
+        }
+        me.log(error.message);
+        return next(error);
       }
-      me.log(error.message);
-      return next(error);
+      return next();
     }
-    return next();
-  });
+  );
 }
