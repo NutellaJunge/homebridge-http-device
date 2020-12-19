@@ -11,6 +11,7 @@ const url = require('url');
 
 function mySwitch(log, config) {
   this.log = log;
+  this.name = config['name'];
   this.getUrl = url.parse(config['getUrl']);
   this.postUrl = url.parse(config['postUrl']);
 }
@@ -22,7 +23,7 @@ mySwitch.prototype.getServices = function () {
     .setCharacteristic(Characteristic.Model, "My switch model")
     .setCharacteristic(Characteristic.SerialNumber, "123-456-789");
 
-  let switchService = new Service.Switch("My switch");
+  let switchService = new Service.Switch(this.name);
   switchService
     .getCharacteristic(Characteristic.On)
     .on('get', this.getSwitchOnCharacteristic.bind(this))
