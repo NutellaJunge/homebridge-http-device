@@ -59,7 +59,9 @@ mySwitch.prototype.setSwitchOnCharacteristic = function (on, next) {
   },
   function (error, response) {
     if (error) {
-      me.log('STATUS: ' + response.statusCode);
+      if (response !== undefined) {
+        me.log('STATUS: ' + response.statusCode);
+      }
       me.log(error.message);
       return next(error);
     }
