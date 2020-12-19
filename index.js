@@ -1,4 +1,4 @@
-const Service, Characteristic;
+let Service, Characteristic;
 
 module.exports = function (homebridge) {
   Service = homebridge.hap.Service;
