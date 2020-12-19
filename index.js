@@ -46,8 +46,7 @@ mySwitch.prototype.getSwitchOnCharacteristic = function (next) {
       me.log(error.message);
       return next(error);
     }
-    me.log(body);
-    return next(null, body.currentState);
+    return next(null, body);
   });
 }
 
