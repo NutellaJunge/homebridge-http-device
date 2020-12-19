@@ -57,7 +57,7 @@ mySwitch.prototype.setSwitchOnCharacteristic = function (on, next) {
         me.log('STATUS: ' + response && response.statusCode);
         return next(error);
       }
-      return next(body);
+      return next();
     }
   );
 }
