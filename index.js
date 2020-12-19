@@ -26,6 +26,10 @@ mySwitch.prototype.getServices = function () {
     .getCharacteristic(Characteristic.On)
     .on('get', this.getSwitchOnCharacteristic.bind(this))
     .on('set', this.setSwitchOnCharacteristic.bind(this));
+  
+  setInterval(function () {
+    this._getStatus(function () {})
+  }.bind(this), 1000)
 
   this.informationService = informationService;
   this.switchService = switchService;
