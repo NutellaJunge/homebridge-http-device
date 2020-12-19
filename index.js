@@ -7,12 +7,11 @@ module.exports = function (homebridge) {
 };
 
 const request = require('request');
-const url = require('url');
 
 function mySwitch(log, config) {
   this.log = log;
   this.name = config['name'];
-  this.url = url.parse(config['url']);
+  this.url = config['url'];
 }
 
 mySwitch.prototype.getServices = function () {
