@@ -12,6 +12,8 @@ function mySwitch(log, config) {
   this.log = log;
   this.name = config['name'];
   this.url = config['url'];
+  
+  this.switchService = new Service.Switch(this.name);
 }
 
 mySwitch.prototype.getServices = function () {
@@ -21,14 +23,12 @@ mySwitch.prototype.getServices = function () {
     .setCharacteristic(Characteristic.Model, "My switch model")
     .setCharacteristic(Characteristic.SerialNumber, "123-456-789");
 
-  let switchService = new Service.Switch(this.name);
-  switchService
+  this.switchService
     .getCharacteristic(Characteristic.On)
     .on('get', this.getSwitchOnCharacteristic.bind(this))
     .on('set', this.setSwitchOnCharacteristic.bind(this));
 
   this.informationService = informationService;
-  this.switchService = switchService;
   
   setInterval(function () {
     this.updateState();
