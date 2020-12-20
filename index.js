@@ -34,7 +34,7 @@ mySwitch.prototype.getServices = function () {
     this.updateState();
   }.bind(this), 1000);
   
-  return [informationService, switchService];
+  return [informationService, this.switchService];
 }
 
 mySwitch.prototype.updateState = function () {
