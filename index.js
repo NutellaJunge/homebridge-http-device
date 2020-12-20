@@ -28,7 +28,7 @@ mySwitch.prototype.getServices = function () {
     .on('set', this.setSwitchOnCharacteristic.bind(this));
   
   setInterval(function () {
-    this.updateState();
+    this.updateState().bind(this);
   }.bind(this), 1000);
   
   return [this.informationService, this.switchService];
