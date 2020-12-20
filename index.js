@@ -36,7 +36,6 @@ mySwitch.prototype.getServices = function () {
 
 mySwitch.prototype.updateState = function () {
   const me = this;
-  me.log(this.switchService);
   request(me.url, function (error, response, body) {
     if (error) {
       me.log('ERROR: ' + error);
