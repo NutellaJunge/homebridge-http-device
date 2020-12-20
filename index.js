@@ -37,6 +37,7 @@ mySwitch.prototype.getServices = function () {
 mySwitch.prototype.updateState = function () {
   const me = this;
   me.log(me.switchService);
+  me.log(this.switchService);
 }
 
 mySwitch.prototype.getSwitchOnCharacteristic = function (next) {
