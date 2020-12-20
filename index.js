@@ -36,16 +36,7 @@ mySwitch.prototype.getServices = function () {
 
 mySwitch.prototype.updateState = function () {
   const me = this;
-  request(me.url, function (error, response, body) {
-    if (error) {
-      me.log('ERROR: ' + error);
-      me.log('STATUS: ' + response && response.statusCode);
-      return;
-    }
-    me.log(this.switchService);
-    this.switchService.setCharacteristic(Characteristic.On, body);
-    return;
-  });
+  me.log(me.switchService);
 }
 
 mySwitch.prototype.getSwitchOnCharacteristic = function (next) {
