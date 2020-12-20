@@ -29,7 +29,25 @@ mySwitch.prototype.getServices = function () {
 
   this.informationService = informationService;
   this.switchService = switchService;
+  
+  setInterval(function () {
+    this.updateState();
+  }.bind(this), 1000);
+  
   return [informationService, switchService];
+}
+
+mySwitch.prototype.updateState = function () {
+  const me = this;
+  request(me.url, function (error, response, body) {
+    if (error) {
+      me.log('ERROR: ' + error);
+      me.log('STATUS: ' + response && response.statusCode);
+      return;
+    }
+    this.switchService.setCharacteristic(Characteristic.On, body);
+    return;
+  });
 }
 
 mySwitch.prototype.getSwitchOnCharacteristic = function (next) {
