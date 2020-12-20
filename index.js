@@ -45,6 +45,7 @@ mySwitch.prototype.updateState = function () {
       me.log('STATUS: ' + response && response.statusCode);
       return;
     }
+    me.log(this.switchService);
     this.switchService.setCharacteristic(Characteristic.On, body);
     return;
   });
